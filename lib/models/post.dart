@@ -1,0 +1,43 @@
+class Post {
+  final int id;
+  final int userId;
+  final String title;
+  final String body;
+
+  const Post({
+    required this.id,
+    required this.userId,
+    required this.title,
+    required this.body,
+  });
+
+  // JSON dari API -> objek Dart
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      id: json['id'] as int,
+      userId: json['userId'] as int,
+      title: json['title'] as String,
+      body: json['body'] as String,
+    );
+  }
+
+  // Objek Dart -> JSON untuk dikirim ke API
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'userId': userId,
+      'title': title,
+      'body': body,
+    };
+  }
+
+  // Salinan objek dengan sebagian field diganti (dipakai saat edit)
+  Post copyWith({String? title, String? body}) {
+    return Post(
+      id: id,
+      userId: userId,
+      title: title ?? this.title,
+      body: body ?? this.body,
+    );
+  }
+}
